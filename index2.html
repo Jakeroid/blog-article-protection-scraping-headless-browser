@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class ProtectedWebComponent extends HTMLElement {
+            constructor() {
+                super();
+                this._protected_root = this.attachShadow({ mode: "closed" });
+            }
+            connectedCallback() {
+                this._protected_root.innerHTML = `<p>Hello from protected area, buddy!</p>`;
+            }
+        }
+        window.customElements.define("protected-web-component", ProtectedWebComponent);
+    </script>
+</head>
+<body>
+    <strong>Following content should be protected:</strong>
+    <protected-web-component></protected-web-component>
+</body>
+</html>
